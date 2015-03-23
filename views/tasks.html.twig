@@ -9,7 +9,12 @@
         <p>Here are all your tasks:</p>
         <ul>
             {% for task in tasks %}
-                <li><a href="/tasks/{{ task.getId }}">{{ task.getDescription }}</a></li>
+                <li><a href="/tasks/{{ task.getId }}">{{ task.getDescription }}</a>
+                <form id="task_complete" name = "task_complete" action="/tasks/{{ task.getId }}" method="post">
+                    <input id='status' name='status' type='checkbox'>
+                    <button type='submit'>click here after checking</button>
+
+                </form></li>
             {% endfor %}
         </ul>
     {% endif %}
@@ -17,7 +22,6 @@
     <form action='/tasks' method='post'>
         <label for='description'>Task description:</label>
         <input id='description' name='description' type='text'>
-
         <button type='submit'>Add task</button>
     </form>
 

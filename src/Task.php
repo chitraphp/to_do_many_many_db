@@ -3,10 +3,12 @@
     {
         private $description;
         private $id;
-        function __construct($initial_description, $initial_id = null)
+        private $status;
+        function __construct($initial_description,$status, $initial_id = null)
         {
             $this->description = $initial_description;
             $this->id = $initial_id;
+            $this->status = $status;
         }
         function getDescription()
         {
@@ -20,10 +22,22 @@
         {
             return $this->id;
         }
+
         function setId($new_id)
         {
             $this->id = (int) $new_id;
         }
+
+        function getStatus()
+        {
+            return $this->status;
+        }
+
+        function setStatus($new_status)
+        {
+            $this->status = $new_status;
+        }
+
         function save()
         {
             $statement = $GLOBALS['DB']->query("INSERT INTO tasks (description) VALUES ('{$this->getDescription()}') RETURNING id;");
