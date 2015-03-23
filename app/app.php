@@ -129,8 +129,18 @@
 
     $app->post("/tasks/{id}", function($id) use ($app) {
         $task = Task::find($id);
-        $status = $_POST['status'];
-        return $app['twig']->render('task.html.twig', array('task' => $task, 'categories'=>$task->getCategories(), 'all_categories'=>Category::getAll()));
+        $description = $task->getDescription();
+        if(isset($_POST['status']))
+        {
+            $status = true;
+        }
+        else
+        {
+            $status = false;
+        }
+        $task = new Task($description,$status);
+        $task->save();
+        return $app['twig']->render('tasks.html.twig', array('tasks' => Task::getAll()));
     });
 
 
