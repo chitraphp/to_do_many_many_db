@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>To do list</title>
+    </head>
+    <body>
+        <h1>All categories</h1>
+
+        <p>Input a category:</p>
+
+        <form action='/categories' method='post'>
+            <label for='category_name'>Category Name:</label>
+            <input type='text' name='category_name' id='category_name'>
+
+            <button name='submit'>Add</button>
+
+        </form>
+
+        {% if categories is not empty %}
+        <p>Here are all your categories:</p>
+        <ul>
+            {% for stylist in stylists %}
+                <li><a href='/categories/{{ stylist.getStylistId }}'>{{ stylist.getStylistName }}</a></li>
+                <li><a href='/categories/{{ stylist.getStylistId }}/edit'>Edit</a> </li>
+
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>There are no categories yet!</p>
+        {% endif %}
+
+    </body>
+</html>
